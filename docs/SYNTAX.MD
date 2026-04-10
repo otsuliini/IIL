@@ -49,7 +49,7 @@ For example "iprint" means ***interesting print.***
 - ```%``` 
     - The **Modulo** operator 
 - ``` ** ```
-    - The **Exponentation** operator 
+    - The **exponentiation** operator 
 
 ### Comparison Operators
 -  ```== ```
