@@ -27,6 +27,7 @@ iprint("Hello World!"); ### printing a string
 iprint(85239) ### printing a integer 
 iprint('A') ### printing a character 
 ```
+When printing integers (as shown above) the integers are converted to strings and then printed.      
 **Note:** You cannot print an integer and a character in the same statement. You must place them in a string. 
 
 In IIL, most keywords begin with an 'i' which stands for "interesting" 
