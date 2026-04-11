@@ -39,60 +39,83 @@ For example "iprint" means ***interesting print.***
 ### Arithmetic Operators 
 
 
-- ``` + ```
-    - The **Addition** operator
-- ```-``` 
-    - The **Subtraction** operator
-- ```*``` 
-    - The **Multiplication** operator
-- ```/```
-    - The **Division** operator 
-- ```%``` 
-    - The **Modulo** operator 
-- ``` ** ```
-    - The **exponentiation** operator 
+### Arithmetic Operators
+
+- ```+```  
+  The **Addition** operator
+
+- ```-```  
+  The **Subtraction** operator
+
+- ```*```  
+  The **Multiplication** operator
+
+- ```/```  
+  The **Division** operator 
+
+- ```%```  
+  The **Modulo** operator 
+
+- ```**```  
+  The **exponentiation** operator 
+
 
 ### Comparison Operators
--  ```== ```
-    - The **Equal** operator 
-- ``` != ``` 
-    - The **Not Equal** operator 
-- ``` < ``` 
-    - The **Less Then** operator 
-- ``` > ``` 
-    - The **Greater Then** operator 
-- ``` <= ``` 
-    - The **less then or equal to** operator 
-- ``` >= ``` 
-    - The **Greater then or equal to** operator 
 
-###  Logical Operators 
+- ```==```  
+  The **Equal** operator 
 
-- ``` && ``` 
-    - The **And** operator 
-- ``` || ``` 
-    - The **Or** operator 
-- ``` ! ``` 
-    - The **Not** operator 
+- ```!=```  
+  The **Not Equal** operator 
+
+- ```<```  
+  The **Less Then** operator 
+
+- ```>```  
+  The **Greater Then** operator 
+
+- ```<=```  
+  The **less then or equal to** operator 
+
+- ```>=```  
+  The **Greater then or equal to** operator 
+
+
+### Logical Operators 
+
+- ```&&```  
+  The **And** operator 
+
+- ```||```  
+  The **Or** operator 
+
+- ```!```  
+  The **Not** operator 
+
 
 ### Assignment Operators
-- ``` =  ``` 
-    - The **assignment** operator 
-- ```+=```
-    - The **Compound Assignment Addition** Operator 
-- ```-=```
-    - The **Compound Assignment Subtraction** Operator 
-- ```*=```
-    - The **Compound Assignment Multiplication** Operator
-- ```/=``` 
-    - The **Compound Assignment Division** Operator 
-- ```%=``` 
-    - The **Compound Assignment Modulo** Operator 
 
+- ```=```  
+  The **assignment** operator 
+
+- ```+=```  
+  The **Compound Assignment Addition** Operator 
+
+- ```-=```  
+  The **Compound Assignment Subtraction** Operator 
+
+- ```*=```  
+  The **Compound Assignment Multiplication** Operator
+
+- ```/=```  
+  The **Compound Assignment Division** Operator 
+
+- ```%=```  
+  The **Compound Assignment Modulo** Operator 
 ### Grouping Operators 
 
-- ``` () ```
-    - **Parentheses.** Used to group expression and control evaluation order
+- ``` () ```     
+**Parentheses.** Used to group expression and control evaluation order
 
 # Comments 
 
@@ -340,20 +363,29 @@ iprint(z)
 
 # Data Types
 
-- integer
-    > represent numeric data type for numbers without fractions
-- Floating Point 
-    > represent numeric data type for numbers with fractions
-- Character 
-    > represent single letter, digit, punctuation mark, symbol, or blank space
-- Boolean 
-    > A value of true or false 
-- String 
-    > Sequence of characters, digits, or symbols. That are treated as text. 
-- NULL
-    > The absence of value. Nothing. 
-- Array 
-    > List with a number of elements in a specific order—typically of the same type
+- **Integer**  
+  Represents whole numbers without decimal points (e.g., 42, -7).
+
+- **Float (Floating Point)**  
+  Represents numbers with decimal points (e.g., 3.14, -0.5).
+
+- **Character**  
+  Represents a single letter, digit, symbol, or space (e.g., 'A', '7', '?').
+
+- **Boolean**  
+  Represents a logical value: either `true` or `false`.
+
+- **String**  
+  Represents a sequence of characters treated as text (e.g., "Hello World").
+
+- **Null**  
+  Represents the absence of a value (nothing).
+
+- **Array**  
+  Represents an ordered collection of elements, usually of the same type.
+
+- **Dictionary**  
+  Represents a collection of key-value pairs for fast lookup by key.
 
 
 
