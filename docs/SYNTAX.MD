@@ -266,6 +266,8 @@ end
 ```
 At this point I don't think I need to explain what the "i" means.
 
+A while loop can be exited using ```exit```. 
+
 ### For Loop
 
 A for loop is declared with ```ifor```. 
