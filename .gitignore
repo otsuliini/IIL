@@ -55,3 +55,4 @@ Makefile
 *.out
 notes.txt
 
+.vscode
