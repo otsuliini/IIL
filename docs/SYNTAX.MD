@@ -159,7 +159,7 @@ iprint("yes")
 # Variables
 
 ## Variable declaration 
-Local variables can be declared with ```var``` which stands for ***interesting variable***. IIL is a dynamically typed language so you don't need to define the datatype. This also means that reassigning values is possible. 
+Local variables can be declared with ```ivar``` which stands for ***interesting variable***. IIL is a dynamically typed language so you don't need to define the datatype. This also means that reassigning values is possible. 
 
 ### Lexical scope 
 - Variables defined within an expression are only accessible within that expression.
@@ -171,14 +171,14 @@ Local variables can be declared with ```var``` which stands for ***interesting v
 Defining a local variable: 
 
 ```
-var x = 1
+ivar x = 1
 
 x = "hello"; ### reassigning the value of x
 ``` 
 
 Uninitialized variables are declared as follows: 
 ```  
-var x
+ivar x
 ```
 The variable can be initialized later: 
 
@@ -188,11 +188,11 @@ x = 10
 
 When referencing the value of ```x```, if the value is undefined, this will result in a compile-time error. 
 
-To make a variable global, you can use ```ivar``` meaning interesting variable. A global variable can be accessed all throughout the file. And if the file is included (added as a dependency) in a different file. A global variable is accessible throughout that file as well. 
+To make a variable global, you can use ```global ivar``` meaning interesting variable. A global variable can be accessed all throughout the file. And if the file is included (added as a dependency) in a different file. A global variable is accessible throughout that file as well. 
 
 For example: 
 ``` 
-ivar x = 1; 
+global ivar x = 1; 
 ```
 
 **Note:** 
@@ -278,11 +278,11 @@ ifor (var x = 0; x < 10; x++) do:
 ## Try
 In ILL a try statement allows you to run a block of code and use except to handle any errors encountered. You can add a finally block to the end. That will execute no matter if the try block catches an error or not.     
 ``` 
-try do:
+itry do:
     print(x)
-except do:  
+iexcept do:  
     print("x is undefined")
-finally do: 
+ifinally do: 
     print("try statement completed")
 ``` 
 
@@ -291,14 +291,14 @@ finally do:
 The basic function syntax is as follows: 
 
 ``` 
-func <name>(<parameters>):
+ifunc <name>(<parameters>):
     <statements>
     return <expression>
 
 ```
 
 ### Local and Global Functions: 
-By default, functions in IIL are local. A global function can be specifically declared by adding i to the beginning of the declaration. Meaning to define a local function you write: ```func basicFunction()``` and to define a global function you type ``` ifunc basicFunction() ```. 
+By default, functions in IIL are local. A global function can be specifically declared by adding i to the beginning of the declaration. Meaning to define a local function you write: ```ifunc basicFunction()``` and to define a global function you type ``` global ifunc basicFunction() ```. 
 
 ### Function Name Rules: 
 
@@ -345,7 +345,7 @@ Calling a function is done like this:
 - Functions nested inside functions are hoisted inside that function. 
 
 ### Nesting rules 
-1. Functions may be defined inside other functions. But these functions are scoped to the parent function and can not be accessed elsewhere. They are defined with ```func```. Using  ```ifunc``` will result in a run-time error. 
+1. Functions may be defined inside other functions. But these functions are scoped to the parent function and can not be accessed elsewhere. They are defined with ```ifunc```. Using  ```global ifunc``` will result in a run-time error. 
 
 ### Recursion
 - Functions can call themselves. 
@@ -353,11 +353,11 @@ Calling a function is done like this:
 ### Example Function 
 
 ```
-func addX(x): 
-    var y = 1 + x
+ifunc addX(x): 
+    ivar y = 1 + x
     return y
 
-var z = addX(x)
+ivar z = addX(x)
 iprint(z)
 ```
 

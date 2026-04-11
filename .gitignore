@@ -42,3 +42,14 @@
 
 #Development
 IDEAS.txt
+command.txt
+
+
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.exe
+*.out
