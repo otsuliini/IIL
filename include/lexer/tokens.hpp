@@ -20,6 +20,11 @@ enum TokenType
 struct Token{
     std::string value;
     TokenType type; 
+
+    int line; 
+    int column; 
 };
+
+
 
 #endif

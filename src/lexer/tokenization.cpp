@@ -6,9 +6,7 @@
 
 class tokenizing{
     std::string source; 
-    size_t pos = 0; 
-    int line = 1; 
-    int column = 1; 
+    
 
     std::vector<std::string> splitString() {
         std::vector<std::string> words;
@@ -42,46 +40,65 @@ class tokenizing{
     std::vector<Token> tokenize(std::string &sourceCode){
         std::vector<Token> tokens;
         std::vector<std::string> src = splitString();
+        int line = 1; 
+        int column = 1; 
 
         while (!src.empty()){
-            if (src.front() == "(") {
+            if (src.front() == "\n"){
+                line++; 
+                column = 1; 
+            }
+            else if (src.front() == "(") {
                 tokens.emplace_back(TokenType::OpenParen, utils::shift(src));
+                column++; 
             }
             else if (src.front() == ")") {
                 tokens.emplace_back(TokenType::CloseParen, utils::shift(src));
+                column++; 
             }
             else if (src.front() == ";") {
                 tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                column++; 
             }
             else if (src.front() == ",") {
                 tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "\"") {
                 tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "+") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "-") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "*") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "/") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "%") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "<") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == ">") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (src.front() == "=") {
                 tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                column++; 
             }
             else if (isalpha(src.front()[0])){// get first character of string from vector. 
                 std::string word = utils::shift(src);
@@ -91,6 +108,7 @@ class tokenizing{
                             try {
                                 if (word.at(3) == ' '){
                                     tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                                    column++; 
                                 }
                             } 
                             catch (const std::out_of_range& e ) {
@@ -98,7 +116,7 @@ class tokenizing{
                             }
                         }
                         else {
-                            errors.push_back({"Expected '}'", )  //! Todo: write the correct error, after i finnish the line and column tracking. 
+                            errors.push_back({"Expected '}'", line, column}); 
                         }
                     }
                     catch (const std::out_of_range& e){
@@ -108,19 +126,24 @@ class tokenizing{
                 }
                 else if(word == "iwhile"){
                     tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                    column++; 
                 }
                 else if(word == "iFor"){
                     tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                    column++; 
                 }
                 else if(word == "exit"){
                     tokens.emplace_back(TokenType::Keyword, utils::shift(src)); 
+                    column++; 
                 }
                 else if(word == "end"){
                     tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                    column++; 
                 }
             }
             else if (src.front() == "\t") {
                 tokens.emplace_back(TokenType::Indent, utils::shift(src));
+                column++; 
             }
             else if (utils::isSkippable(src.front()[0])){
                 utils::shift(src);
