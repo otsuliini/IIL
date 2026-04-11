@@ -53,3 +53,5 @@ Makefile
 *.o
 *.exe
 *.out
+notes.txt
+
