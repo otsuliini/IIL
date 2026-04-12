@@ -17,6 +17,10 @@ enum TokenType
     Indent
 };
 
+bool isDelimiter(char c){
+    return c == '(' || c == ')' || c == ',' || c == ';'
+}
+
 struct Token{
     std::string value;
     TokenType type; 

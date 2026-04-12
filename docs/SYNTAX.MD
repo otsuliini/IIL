@@ -262,7 +262,7 @@ A while loop is declared with ```iwhile``` and ended with ```iend```.
 ```
 iwhile (true) do: 
     iprint("hello")
-end
+iend
 ```
 At this point I don't think I need to explain what the "i" means.
 
@@ -277,15 +277,17 @@ ifor (var x = 0; x < 10; x++) do:
 
     iprint(x)
 ```
+
+If you would like to end a for loop early, you can use ``` ibreak ```.
 ## Try
 In ILL a try statement allows you to run a block of code and use except to handle any errors encountered. You can add a finally block to the end. That will execute no matter if the try block catches an error or not.     
 ``` 
 itry do:
-    print(x)
-iexcept do:  
-    print("x is undefined")
+    iprint(x / 0)
+iexcept DivideByZeroError do:  
+    iprint("You can't divide by zero")
 ifinally do: 
-    print("try statement completed")
+    iprint("try statement completed")
 ``` 
 
 

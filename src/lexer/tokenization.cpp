@@ -9,27 +9,49 @@ class tokenizing{
     
 
     std::vector<std::string> splitString() {
-        std::vector<std::string> words;
-        std::string word;
+        std::vector<std::string> chunks;
+        std::string buffer;
 
-        for (char ch : source) {
-            
-            if (ch != ' ') {
-                word += ch;
-            } else if (!word.empty()) { //! TODO: Make it check for multi line comments
-                if (word[0] == '#' && word[1] == '#'){
-                    words.push_back(word);
-                    word.clear();
+        for (int i = 0 < source.size(); i++;) {  
+            char ch = source[i];
+
+            if (isDelimiter(ch)) {
+                if (!buffer.empty()){
+                    chunks.push_back(buffer); // push the buffer 
+                    buffer.clear();
                 }
-                word.clear();
+                chunks.push_back(std::string(1, ch)); // push the actual delimiter
+            } 
+
+            else if (ch == ' '){
+                if (!buffer.empty()){
+                    chunks.push_back(buffer);
+                    buffer.clear();
+                }
+            }
+            else if (!buffer.empty()) { //! TODO: Make it check for multi line comments
+                
+                if (ch == '#' && i + 1 < source.size()  && source[i + 1] == '#'){
+                    if (!buffer.empty()){
+                        chunks.push_back(buffer);
+                        buffer.clear();
+                    }
+                    while (ch < source.size() && source[i] != '\n') {
+                        i++;
+                    }
+                    continue; 
+                }
+            }
+            else {
+                buffer += ch;
             }
         } 
 
-        if (!word.empty()) {
-            words.push_back(word); 
+        if (!buffer.empty()) {
+            chunks.push_back(buffer); 
         }
 
-        return words;
+        return chunks;
     }
 
 
@@ -49,55 +71,55 @@ class tokenizing{
                 column = 1; 
             }
             else if (src.front() == "(") {
-                tokens.emplace_back(TokenType::OpenParen, utils::shift(src));
+                tokens.emplace_back(TokenType::OpenParen, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == ")") {
-                tokens.emplace_back(TokenType::CloseParen, utils::shift(src));
+                tokens.emplace_back(TokenType::CloseParen, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == ";") {
-                tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == ",") {
-                tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "\"") {
-                tokens.emplace_back(TokenType::Delimiter, utils::shift(src));
+                tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "+") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "-") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "*") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "/") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "%") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "<") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == ">") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (src.front() == "=") {
-                tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                 column++; 
             }
             else if (isalpha(src.front()[0])){// get first character of string from vector. 
@@ -107,7 +129,7 @@ class tokenizing{
                         if(word.at(2) == ':'){
                             try {
                                 if (word.at(3) == ' '){
-                                    tokens.emplace_back(TokenType::Operator, utils::shift(src));
+                                    tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
                                     column++; 
                                 }
                             } 
@@ -125,32 +147,47 @@ class tokenizing{
                     
                 }
                 else if(word == "iwhile"){
-                    tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
                     column++; 
                 }
                 else if(word == "iFor"){
-                    tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
                     column++; 
                 }
                 else if(word == "exit"){
-                    tokens.emplace_back(TokenType::Keyword, utils::shift(src)); 
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column); 
                     column++; 
                 }
-                else if(word == "end"){
-                    tokens.emplace_back(TokenType::Keyword, utils::shift(src));
+                else if(word == "iend"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
                     column++; 
+                }
+                else if(word == "ifor"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
+                    column++;
+                }
+                else if(word == "ibreak"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
+                    column++;
+                }
+                else if(word == "itry"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column); 
+                }
+                else if(word == "ixcept"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
+                }
+                else if(word == "ifinally do:"){
+                    tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
                 }
             }
             else if (src.front() == "\t") {
-                tokens.emplace_back(TokenType::Indent, utils::shift(src));
+                tokens.emplace_back(TokenType::Indent, utils::shift(src), line, column);
                 column++; 
             }
             else if (utils::isSkippable(src.front()[0])){
                 utils::shift(src);
             }
-
             
-
         }
         return tokens;     
     }
