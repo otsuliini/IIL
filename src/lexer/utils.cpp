@@ -18,4 +18,8 @@ namespace utils{
         if (token == ' '){
             return true;       }
     }
+
+    bool isDelimiter(char c){
+    return c == '(' || c == ')' || c == ',' || c == ';';
+    }
 }

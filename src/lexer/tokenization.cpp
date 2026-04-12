@@ -15,7 +15,7 @@ class tokenizing{
         for (int i = 0 < source.size(); i++;) {  
             char ch = source[i];
 
-            if (isDelimiter(ch)) {
+            if (utils::isDelimiter(ch)) { // split the strings based off some parameters. 
                 if (!buffer.empty()){
                     chunks.push_back(buffer); // push the buffer 
                     buffer.clear();
@@ -179,6 +179,7 @@ class tokenizing{
                 else if(word == "ifinally do:"){
                     tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
                 }
+                
             }
             else if (src.front() == "\t") {
                 tokens.emplace_back(TokenType::Indent, utils::shift(src), line, column);
@@ -186,6 +187,16 @@ class tokenizing{
             }
             else if (utils::isSkippable(src.front()[0])){
                 utils::shift(src);
+            }
+
+            else if(utils::is_number(src.front())){
+                std::string number; 
+
+                while(!src.empty() && utils::is_number(src.front())){
+                    number += utils::shift(src); 
+                }
+
+                tokens.emplace_back(TokenType::Number, TokenType::Number);
             }
             
         }
