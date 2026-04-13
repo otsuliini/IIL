@@ -1,8 +1,9 @@
 #include <iostream> 
 #include <bits/stdc++.h> 
 #include "utils.hpp"
+#include "tokens.hpp"
 namespace utils{
-    bool is_number(const std::string& s)
+    bool isNumber(const std::string& s)
     {
         return !s.empty() && std::find_if(s.begin(), 
             s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
@@ -19,7 +20,8 @@ namespace utils{
             return true;       }
     }
 
-    bool isDelimiter(char c){
-    return c == '(' || c == ')' || c == ',' || c == ';';
+    bool isDelimiter(char ch){
+        return delimiters.count(std::string(1, ch));
     }
+
 }

@@ -1,14 +1,11 @@
-#ifndef TOKENS_HPP
-#define TOKENS_HPP
-#include <iostream>
 #pragma once
+#include <iostream>
+#include <unordered_set> 
 
 enum TokenType
 {
     Number,
-    String,
     Identifier, 
-    ivar,
     Keyword,
     OpenParen,
     CloseParen,
@@ -26,6 +23,40 @@ struct Token{
     int column; 
 };
 
+inline const std::unordered_set<std::string> operators = {
+    ""
+}; 
+
+inline const std::unordered_set<std::string> operators = {
+    "+", "-", "*", "/", "%", "<", ">", "="
+};
+
+inline const std::unordered_set<std::string> delimiters = {
+    ";", ",", "\"" ":"
+};
+
+inline const std::unordered_set<std::string> keywords = {
+    "ivar",
+    "global",
+    "NULL",
+    "if",
+    "else",
+    "eif",
+    "do",
+    "iwhile",
+    "iend",
+    "exit",
+    "ifor",
+    "ibreak",
+    "itry",
+    "iexcept",
+    "ifinally",
+    "ifunc",
+    "return",
+    "true",
+    "false"
+};
 
 
-#endif
+
+

@@ -19,21 +19,6 @@ IIL is made to be as simple and intuitive as possible. This is a simple guide on
 [Try](#try)    
 [Functions](#Functions)    
 [Data Types](#data-types)   
-# Print
-
-A print statetement can print any variable of any datatype. If you would like to print a string, character, or integer. It can be done: 
-``` 
-iprint("Hello World!"); ### printing a string
-iprint(85239) ### printing a integer 
-iprint('A') ### printing a character 
-```
-When printing integers (as shown above) the integers are converted to strings and then printed.      
-**Note:** You cannot print an integer and a character in the same statement. You must place them in a string. 
-
-In IIL, most keywords begin with an 'i' which stands for "interesting" 
-For example "iprint" means ***interesting print.***    
-
-
 # Operators 
 
 ### Arithmetic Operators 
@@ -304,7 +289,7 @@ ifunc <name>(<parameters>):
 ### Local and Global Functions: 
 By default, functions in IIL are local. A global function can be specifically declared by adding i to the beginning of the declaration. Meaning to define a local function you write: ```ifunc basicFunction()``` and to define a global function you type ``` global ifunc basicFunction() ```. 
 
-### Function Name Rules: 
+### Function Identifier Rules: 
 
 1. A function name must begin with a letter or an underscore ```_```.
 2. Function names are case sensitive. (eg. goo ≠ Goo)
