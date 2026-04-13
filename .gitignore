@@ -55,6 +55,7 @@ Makefile
 *.out
 notes.txt
 
-.vscode/
+
 
 todo.txt
+.vscode
