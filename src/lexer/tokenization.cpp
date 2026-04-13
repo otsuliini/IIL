@@ -30,7 +30,7 @@ class tokenizing{
                     buffer.clear();
                 }
             }
-            
+
             else if (ch == '#' && i + 1 < source.size() && source[i + 1] == '#' && i + 2 < source.size() && source[i + 2] == '#') {
                 if (!buffer.empty()) {
                     chunks.push_back(buffer);
@@ -43,7 +43,7 @@ class tokenizing{
                 i += 3; // skip last 3 hashtags 
             }
 
-            else if (ch == '#' && i + 1 < source.size()  && source[i + 1] == '#') { //! TODO: Make it check for multi line comments
+            else if (ch == '#' && i + 1 < source.size()  && source[i + 1] == '#') { 
                 
                 
                 if (!buffer.empty()){
