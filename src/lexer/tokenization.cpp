@@ -45,7 +45,6 @@ class tokenizing{
 
             else if (ch == '#' && i + 1 < source.size()  && source[i + 1] == '#') { 
                 
-                
                 if (!buffer.empty()){
                     chunks.push_back(buffer);
                     buffer.clear();

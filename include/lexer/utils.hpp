@@ -1,5 +1,3 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
 #pragma once
 
 #include <iostream> 
@@ -13,7 +11,4 @@ namespace utils{
     bool isDelimiter(char c); 
 
 }
-
-
-#endif 
 
