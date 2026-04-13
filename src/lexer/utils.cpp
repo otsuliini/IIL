@@ -1,7 +1,7 @@
 #include <iostream> 
 #include <bits/stdc++.h> 
-#include "utils.hpp"
-#include "tokens.hpp"
+#include "lexer/utils.hpp"
+#include "lexer/tokens.hpp"
 namespace utils{
     bool isNumber(const std::string& s)
     {
@@ -17,7 +17,9 @@ namespace utils{
 
     bool isSkippable(char token){
         if (token == ' '){
-            return true;       }
+            return true;       
+        }
+        return false; 
     }
 
     bool isDelimiter(char ch){

@@ -5,6 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/include/**",
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/tests/**",
                 "C:/msys64/ucrt64/include/**",
                 "C:/msys64/ucrt64/include/c++/15.2.0/**"
             ],

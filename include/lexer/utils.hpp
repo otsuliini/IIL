@@ -2,7 +2,7 @@
 
 #include <iostream> 
 namespace utils{
-    bool is_number(const std::string& s);
+    bool isNumber(const std::string& s);
 
     std::string shift(std::vector<std::string, std::allocator<std::string>>& src);
 

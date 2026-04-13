@@ -21,11 +21,10 @@ struct Token{
 
     int line; 
     int column; 
-};
 
-inline const std::unordered_set<std::string> operators = {
-    ""
-}; 
+    Token(TokenType type, std::string value, int line, int column)
+        : type(type), value(value), line(line), column(column) {}
+};
 
 inline const std::unordered_set<std::string> operators = {
     "+", "-", "*", "/", "%", "<", ">", "="

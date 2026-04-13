@@ -7,14 +7,15 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "${workspaceFolder}/src/lexer/tokenization.cpp",
+                "${workspaceFolder}/src/lexer/utils.cpp",
                 "${file}",
                 "-I${workspaceFolder}/include",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
-
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
