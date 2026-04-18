@@ -1,7 +1,7 @@
 #include <iostream> 
 #include <bits/stdc++.h> 
-#include "lexer/utils.hpp"
-#include "lexer/tokens.hpp"
+#include "src\lexer\include\utils.hpp"
+#include "ILL/lexer/tokens.hpp"
 namespace utils{
     bool isNumber(const std::string& s)
     {

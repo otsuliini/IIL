@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
-#include "lexer/tokens.hpp"
-#include "lexer/utils.hpp"
-#include "lexer/lexerError.hpp"
+#include "ILL/lexer/tokens.hpp"
+#include "lexer/include/utils.hpp"
+#include "ILL/lexer/lexerError.hpp"
 #include <unordered_set> 
-#include "lexer/tokenization.hpp"
+#include "ILL/lexer/tokenization.hpp"
 
 std::string source; 
 int line = 1; 
