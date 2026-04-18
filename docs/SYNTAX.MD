@@ -177,7 +177,7 @@ To make a variable global, you can use ```global ivar``` meaning interesting var
 
 For example: 
 ``` 
-global ivar x = 1; 
+global ivar x = 1
 ```
 
 **Note:** 
@@ -251,7 +251,7 @@ iend
 ```
 At this point I don't think I need to explain what the "i" means.
 
-A while loop can be exited using ```exit```. 
+A while loop can be exited using ```iexit```. 
 
 ### For Loop
 
@@ -265,7 +265,7 @@ ifor (var x = 0; x < 10; x++) do:
 
 If you would like to end a for loop early, you can use ``` ibreak ```.
 ## Try
-In ILL a try statement allows you to run a block of code and use except to handle any errors encountered. You can add a finally block to the end. That will execute no matter if the try block catches an error or not.     
+In ILL a try statement allows you to run a block of code and use except to handle any errors encountered. You can add a finally block to the end. That will execute no matter if the try block catches an error or not. 
 ``` 
 itry do:
     iprint(x / 0)
@@ -282,7 +282,7 @@ The basic function syntax is as follows:
 ``` 
 ifunc <name>(<parameters>):
     <statements>
-    return <expression>
+    ireturn <expression>
 
 ```
 
@@ -307,7 +307,7 @@ A function body contains the instructions that define what the function does. Th
 
 ### Return 
 
-In IIL returning a value from a function is done with a ```return``` statement. The value of the returned expression is returned back to the function caller. If no return statement is present, the function will return the value of the last expression in the function. 
+In IIL returning a value from a function is done with a ```ireturn``` statement. The value of the returned expression is returned back to the function caller. If no return statement is present, or if the return statements does not feature an expression/variable/value, the function will return the value of the last expression in the function. 
 
 ### Function Calls 
 
@@ -344,7 +344,7 @@ Calling a function is done like this:
 ```
 ifunc addX(x): 
     ivar y = 1 + x
-    return y
+    ireturn y
 
 ivar z = addX(x)
 iprint(z)
@@ -375,6 +375,17 @@ iprint(z)
 
 - **Dictionary**  
   Represents a collection of key-value pairs for fast lookup by key.
+
+
+# Importing Files/Modules
+
+Importing a file/module in IIL is simple it is done with ```import```, followed by the name of the module (the file name). Accessing functions from the imported module is done with ```.```:
+
+``` 
+import hashing ## Importing the module 
+
+hashing.salt() ## Call the function
+```
 
 
 

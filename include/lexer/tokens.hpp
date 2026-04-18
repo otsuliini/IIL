@@ -44,16 +44,16 @@ inline const std::unordered_set<std::string> keywords = {
     "do",
     "iwhile",
     "iend",
-    "exit",
+    "iexit",
     "ifor",
     "ibreak",
     "itry",
     "iexcept",
     "ifinally",
     "ifunc",
-    "return",
-    "true",
-    "false"
+    "ireturn",
+    "True",
+    "False"
 };
 
 

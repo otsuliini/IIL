@@ -1,0 +1,165 @@
+ program = stmt_list #; (* '#' means the end of the file *)
+ stmt_list = {stmt}; (* stmt = statement *);
+ stmts = stmt {stmts}
+ stmt = (expression | expression | funcstmt | forstmt | whilestmt | trystmt | ifstmt); 
+ 
+ expression = arithmetic_expression
+                | boolean_expression
+                | logical_expression
+                | string_expression
+                | assignment_expression;
+
+
+ arithmetic_expression = ["("] (identifier | word | number) [")"] [operator] ["("] (identifier | word | number) [")"];
+ boolean_expression = (identifier | word | number) comparison_op (identifier | word | number); 
+ logical_expression = (arithmetic_expression | boolean_expression) binary_op {(arithmetic_expression | boolean_expression) binary_op}; 
+ string_expression = string "+" string; 
+ assignment_expression = [global] [ivar] identifier assignment_op (value | identifier | expression); 
+
+
+              
+ 
+ operator = logical_op
+            | assignment_op
+            | arithemtic_op
+            | comparison_op; 
+
+ logical_op = unary_op | binary_op; 
+ unary_op = "!"; 
+ binary_op = "||" | "&&"; 
+ assignment_op = "=" 
+                | "+="
+                | "-=" 
+                | "*="
+                | "/=" 
+                | "%="; 
+ arithemtic_op = "+"
+                | "-"
+                | "*"
+                | "/"
+                | "%"
+                | "**"; 
+
+ comparison_op = "<" 
+                | ">" 
+                | "=>" 
+                | "<=" 
+                | "!=" 
+                | "==";
+
+ block = NEWLINE INDENT stmts DEDENT;
+ (* VARIABLE INITIALIZATION *)
+ identifier = word;
+ boolvalue = "True" | "False"; 
+ value = number 
+            | string 
+            | "NULL";
+            | boolvalue
+ digit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "0";
+ number = digit {digit};
+ string = '"'{word} [" " word] '"';
+ word = character {character};
+ character = "a" 
+                | "b" 
+                | "c" 
+                | "d" 
+                | "e" 
+                | "f" 
+                | "g" 
+                | "h" 
+                | "i" 
+                | "j" 
+                | "k" 
+                | "l" 
+                | "m" 
+                | "n" 
+                | "o" 
+                | "p" 
+                | "q" 
+                | "r" 
+                | "s" 
+                | "t" 
+                | "u" 
+                | "v" 
+                | "w" 
+                | "x" 
+                | "y" 
+                | "z" 
+                | "A" 
+                | "B" 
+                | "C" 
+                | "D" 
+                | "E" 
+                | "F" 
+                | "G" 
+                | "H" 
+                | "I" 
+                | "J" 
+                | "K" 
+                | "L" 
+                | "M" 
+                | "N" 
+                | "O" 
+                | "P" 
+                | "Q" 
+                | "R" 
+                | "S" 
+                | "T" 
+                | "U" 
+                | "V" 
+                | "W" 
+                | "X" 
+                | "Y" 
+                | "Z" 
+                | digit
+                | "_";
+
+ (* FUNCTION DECLARATION *)
+ funcdef = ["global"] identifier "(" [parameter_list] ")" ":";
+ parameter_list = defparameter {defparamter ","} defparameter | defparameter;
+ defparameter = parameter;
+ parameter = identifier;
+ return = "ireturn" (value | expression | identifier);
+ funcstmt = funcdef block [return]
+
+
+ (* FOR STATEMENT *)
+ forstmt = "ifor" "(" (variable-decl | identifier)  ";" expression ";" [variable "++"] ")" "do:" block;
+
+
+ (* WHILE STATEMENT *)
+ whilestmt = "iwhile" (expression | boolvalue) "do:" block "iend"; 
+            | "iwhile" "(" (expression | variable) ")" "do:" block "iend"; 
+  
+ (* TRY STATEMENT *)
+ trystmt = "itry" "do:" block {except_block} finally_block; 
+
+ except_block = "iexcept" ERROR "do:" block; 
+ finally_block = "ifinally" "do:" block; 
+ 
+ (* IF STATEMENT *)
+
+ ifstmt = "if" "(" boolean_expression ")" "do:" block {else_if_block} [else_block];
+            | "if" "(" logical_expression ")" "do:" block 
+            | "if" "(" [unary_op] variable ")" "do:" block {else_if_block} [else_block]; 
+
+ else_if_block = "eif" "(" expression ")" "do:" block; 
+ else_block = "else" "do": block; 
+
+
+
+
+
+
+
+
+
+
+ (* The EBNF grammar (I used): 
+ [] around optional elements - means zero or one
+ {} around repeated elements - means zero or more
+ () around elements to be grouped
+ Must put double quotes around any special terminal symbols
+ statements are ended with ; 
+ | means or
+*)
