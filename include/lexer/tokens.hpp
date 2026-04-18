@@ -11,7 +11,8 @@ enum TokenType
     CloseParen,
     Operator,
     Delimiter,
-    Indent
+    Indent,
+    FileEnd,
 };
 
 

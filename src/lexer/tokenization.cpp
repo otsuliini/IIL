@@ -135,5 +135,7 @@ std::vector<Token> tokenizing::tokenize(std::string &sourceCode){
         }
         
     }
+    tokens.emplace_back(TokenType::FileEnd, "fileEnd", line, column); 
     return tokens;     
 }
+

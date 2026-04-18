@@ -11,7 +11,7 @@ namespace utils{
 
     std::string shift(std::vector<std::string, std::allocator<std::string>>& src) {
         std::string c = src.front(); //saves first element of vector
-        src.erase(src.begin()); // removes the first character
+        src.erase(src.begin()); // removes the first element
         return c;
     }
 

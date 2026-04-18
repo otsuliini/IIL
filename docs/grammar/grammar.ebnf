@@ -1,6 +1,6 @@
  program = stmt_list #; (* '#' means the end of the file *)
  stmt_list = {stmt}; (* stmt = statement *);
- stmts = stmt {stmts}
+ stmts = stmt {stmt}
  stmt = (expression | expression | funcstmt | forstmt | whilestmt | trystmt | ifstmt); 
  
  expression = arithmetic_expression
@@ -120,7 +120,7 @@
  defparameter = parameter;
  parameter = identifier;
  return = "ireturn" (value | expression | identifier);
- funcstmt = funcdef block [return]
+ funcstmt = funcdef block [return];
 
 
  (* FOR STATEMENT *)
