@@ -23,7 +23,7 @@ struct Token{
     int line; 
     int column; 
 
-    Token(TokenType type, std::string value, int line, int column)
+    Token(TokenType type, std::string value, int line, int column) //initializer list
         : type(type), value(value), line(line), column(column) {}
 };
 
