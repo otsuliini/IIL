@@ -1,6 +1,6 @@
 #include <cassert>
 #include <iostream>
-#include "../include/ILL/lexer/tokenization.hpp"
+#include "../include/IIL/lexer/tokenization.hpp"
 
 void test_var_declaration() {
     tokenizing lexer;
