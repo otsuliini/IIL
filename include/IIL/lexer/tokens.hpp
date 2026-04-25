@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
-#include <unordered_set> 
+#include <unordered_set>
 
 enum TokenType
 {
     Number,
-    Identifier, 
+    Identifier,
     Keyword,
     OpenParen,
     CloseParen,
@@ -15,25 +15,26 @@ enum TokenType
     FileEnd,
 };
 
-
-struct Token{
+struct Token
+{
     std::string value;
-    TokenType type; 
+    TokenType type;
 
-    int line; 
-    int column; 
+    int line;
+    int column;
 
-    Token(TokenType type, std::string value, int line, int column) //initializer list
-        : type(type), value(value), line(line), column(column) {}
+    Token(TokenType type, std::string value, int line, int column) // initializer list
+        : type(type), value(value), line(line), column(column)
+    {
+    }
 };
 
 inline const std::unordered_set<std::string> operators = {
-    "+", "-", "*", "/", "%", "<", ">", "="
-};
+    "+", "-", "*", "/", "%", "<", ">", "="};
 
 inline const std::unordered_set<std::string> delimiters = {
-    ";", ",", "\"" ":"
-};
+    ";", ",", "\""
+              ":"};
 
 inline const std::unordered_set<std::string> keywords = {
     "ivar",
@@ -42,7 +43,7 @@ inline const std::unordered_set<std::string> keywords = {
     "if",
     "else",
     "eif",
-    "do", 
+    "do",
     "iwhile",
     "iend",
     "iexit",
@@ -54,9 +55,4 @@ inline const std::unordered_set<std::string> keywords = {
     "ifunc",
     "ireturn",
     "True",
-    "False"
-};
-
-
-
-
+    "False"};
