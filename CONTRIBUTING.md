@@ -78,7 +78,7 @@ Once the issue is filed:
 > [!TIP]
 > All in all, I don't take this stuff seriously lol. So just don't be an idiot and try your best. 
 
-### Suggesting Enahancements
+### Suggesting Enhancements
 
 So you have an idea for a feauture to add to IIL? This section guides you through submitting an enhance suggestion.  
 
