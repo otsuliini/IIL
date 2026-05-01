@@ -6,19 +6,19 @@ IIL is made to be as simple and intuitive as possible. This is a simple guide on
 
 # Contents
 
-[Print](#print)    
-[Operators](#operators)    
-[Comments](#comments)    
-[Precedence Rules](#precedence-rules)     
-[Statement Endings](#statement-endings)     
-[Variables](#variables)    
-[Variable Naming Rules](#variable-naming-rules)  
-[Keywords](#keywords)  
-[If-Statements](#if-statements)    
-[Loops](#loops)    
-[Try](#try)    
-[Functions](#Functions)    
-[Data Types](#data-types)   
+> [Print](#print)    
+> [Operators](#operators)    
+> [Comments](#comments)    
+> [Precedence Rules](#precedence-rules)     
+> [Statement Endings](#statement-endings)     
+> [Variables](#variables)    
+> [Variable Naming Rules](#variable-naming-rules)  
+> [Keywords](#keywords)  
+> [If-Statements](#if-statements)    
+> [Loops](#loops)    
+> [Try](#try)    
+> [Functions](#Functions)    
+> [Data Types](#data-types)   
 # Operators 
 
 ### Arithmetic Operators 
