@@ -49,4 +49,4 @@ target_include_directories(IIL_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/src/parser/errors/include
     ${CMAKE_SOURCE_DIR}/src/parser/utils/include
 )
-add_test(NAME IIL_tests COMMAND IIL_tests)
+add_test(NAME lexer_test COMMAND IIL_tests)

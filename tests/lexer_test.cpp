@@ -1,8 +1,15 @@
 #include <gtest/gtest.h>
 #include "../include/IIL/lexer/tokenization.hpp"
+#include "../include/IIL/lexer/tokens.hpp"
 
 TEST(lexerTests, HandlesOperators)
 {
-    char op = '+';                    
-    EXPECT_EQ(tokenize(op), Operator);  
+    std::string op = "+";
+    int expected_line = 1; 
+    int expected_column = 1; 
+    std::vector<Token> expectedOutput = { Token{TokenType::Operator, op, expected_line, expected_column} };
+    
+    tokenizing lexer;
+    EXPECT_EQ(lexer.tokenize(op), expectedOutput);
 }
+
