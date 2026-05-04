@@ -23,7 +23,6 @@ add_executable(IIL
     src/lexer/utils/isNumber.cpp
     src/lexer/utils/isSkippable.cpp
     src/lexer/utils/shift.cpp
-    src/parser/errors/errorRoutines.cpp
     src/parser/errors/parserError.cpp
     src/parser/utils/helperRoutines.cpp
     src/parser/AST.cpp
