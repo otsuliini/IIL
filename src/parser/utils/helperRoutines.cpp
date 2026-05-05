@@ -3,7 +3,7 @@
 #include "parserError.hpp"
 #include <exception>
 
-Precedence analyzePrecedence(ASTnode opNode) {
+Precedence parserUtils::analyzePrecedence(ASTnode opNode) {
     std::string value = opNode.NodeValue.value; 
 
     if (value == "**"){
