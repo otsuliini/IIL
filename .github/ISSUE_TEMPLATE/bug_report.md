@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug report issue
 about: 'Create a report to help IIL improve. '
 title: "[BUG]"
 labels: bug
