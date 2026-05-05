@@ -1,6 +1,6 @@
 # Security
 
-IIL is a very secure programming language. I test extensively for exploits. 
+IIL is a very secure programming language. I test extensively for exploits. (just kidding I don't (yet))
 
 ## For major security flaws: 
 
