@@ -4,6 +4,8 @@
 #include "parsing.hpp"
 #include <exception>
 #include "tokens.hpp"
+#include <iostream>
+#include <algorithm>
 
 Precedence parserUtils::getPrecedence(const Token token) {
     std::string value = token.value; 
@@ -32,5 +34,17 @@ Precedence parserUtils::getPrecedence(const Token token) {
     }
     else {
         //! Add error handling.
+    }
+}
+
+
+bool parserUtils::isBinary(std::string op) {
+    
+    auto iterator = std::find(operators.begin(), operators.end(), op); 
+    if (iterator != operators.end()) {
+        return true; 
+    }
+    else {
+        return false; 
     }
 }

@@ -3,4 +3,5 @@
 
 namespace parserUtils {
     Precedence getPrecedence(ASTnode opNode); 
+    bool isBinary(std::string op); 
 }

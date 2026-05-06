@@ -3,18 +3,21 @@
 #include "helperRoutines.hpp"
 // Example: 1 + 1. Tokens are '1' '+' and '1'
 
-std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, Precedence minPrecedence)
+std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, const Precedence minPrecedence)
 {
-    lookAheadToken lookAhead;
-    std::string op; 
 
-    for (int i; i <= Tokens.size(); i++) {
-        lookAhead.precedence = parserUtils::getPrecedence(Tokens[i + 1]);
-    }
-
-    while (lookAhead.precedence >= minPrecedence) {
-        op = lookAhead
-    }
+    std::string op;
+    Token CurTok;
+    int i = 1;
+    lookAheadToken lookAhead = Tokens[i];
+    
+    while (lookAhead.precedence >= minPrecedence && parserUtils::isBinary(lookAhead.value))
+    {
+        CurTok = Tokens[i];
+        op = lookAhead.value;
+        // Logic Here:
         
+        // Move CurTok:
+        i++;
+    }
 }
-
