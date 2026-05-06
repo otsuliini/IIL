@@ -1,10 +1,12 @@
 #include "ASTNode.hpp"
 #include "helperRoutines.hpp"
 #include "parserError.hpp"
+#include "parsing.hpp"
 #include <exception>
+#include "tokens.hpp"
 
-Precedence parserUtils::getPrecedence(ASTnode const opNode) {
-    std::string value = opNode.NodeValue.value; 
+Precedence parserUtils::getPrecedence(const Token token) {
+    std::string value = token.value; 
     //! Add parentheses precedence
 
     if (value == "**"){
