@@ -36,8 +36,10 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, co
         i++;
 
         parseRHS(CurTok, op);
-
-        // Logic Here:
+        while (parserUtils::isBinary(lookAhead.value) && parserUtils::comparePrecedence<lookAheadToken, Token>(lookAhead, op) == lookAhead)
+        {   
+            
+        }
     }
 }
 

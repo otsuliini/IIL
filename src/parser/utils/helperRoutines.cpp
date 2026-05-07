@@ -48,3 +48,4 @@ bool parserUtils::isBinary(std::string op) {
         return false; 
     }
 }
+
