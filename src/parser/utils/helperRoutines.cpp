@@ -49,3 +49,15 @@ bool parserUtils::isBinary(std::string op) {
     }
 }
 
+bool parserUtils::isRightAssociative(Token op)
+{
+    std::string *find_ops = std::find(std::begin(right_associative_ops), std::end(right_associative_ops), op);
+    if (find_ops != std::end(right_associative_ops))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

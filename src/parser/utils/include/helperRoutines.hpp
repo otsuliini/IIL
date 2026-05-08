@@ -3,8 +3,21 @@
 #include "tokens.hpp"
 #include <type_traits>
 #include <variant>
+
 namespace parserUtils
 {
+    std::string right_associative_ops[10] =
+        {
+            "=",
+            "+=",
+            "-=",
+            "*=",
+            "/=",
+            "%=",
+            "**",
+            "++",
+            "--"};
+
     Precedence getPrecedence(ASTnode opNode);
     bool isBinary(std::string op);
 
@@ -28,4 +41,6 @@ namespace parserUtils
         return PrecedenceResult::Token1;
     }
 
+    bool isRightAssociative(Token op); 
+    
 }
