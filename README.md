@@ -16,3 +16,7 @@ Read this:
 
 > [!IMPORTANT]
 > IIL is still under development and nowhere near done. 
+
+
+## License
+Once IIL gets farther into development, the standard library will havea  MIT license and the interpreter will have  GLPv3 license. But until then the whole project is GLPv3. 
