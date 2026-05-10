@@ -16,11 +16,11 @@ struct OpTok : Token
     std::unique_ptr<Token> leftChild;
     std::unique_ptr<Token> rightChild;
 
-    OpTok(Token left_child, Token right_child, Token val)
+    OpTok(std::unique_ptr<Token>  left_child, std::unique_ptr<Token> right_child, Token val)
     {
         std::unique_ptr<OpTok> ptrTok;
-        leftChild = left_child;
-        rightChild = right_child;
+        leftChild = std::move(left_child);
+        rightChild = std::move(right_child);
         value = val.value;
         Precedence precednece = Precedence::Undefined;
     }
