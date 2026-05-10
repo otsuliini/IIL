@@ -23,7 +23,7 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
         curTok = Tokens[i];
         if (parserUtils::isBinary(curTok.value))
         {
-            curTok.rightChild = Tokens[i - 1];
+            curTok.rightChild = Tokens[i - 1]; //TODO: Make Tokens a unique_ptr or something. Idk. 
             parserUtils::buffer_Op(curTok);
             curTok.leftChild = Tokens[i + 1];
         }
