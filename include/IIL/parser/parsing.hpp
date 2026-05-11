@@ -22,56 +22,62 @@ struct OpTok : Token
         leftChild = std::move(left_child);
         rightChild = std::move(right_child);
         value = val.value;
-        Precedence precednece = Precedence::Undefined;
+        Precedence precedence = Precedence::Undefined;
     }
     OpTok(std::unique_ptr<Token> left_child, std::unique_ptr<Token> right_child)
     {
         std::unique_ptr<OpTok> ptrTok;
         leftChild = std::move(left_child);
         rightChild = std::move(right_child);
-        Precedence precednece = Precedence::Undefined;
+        Precedence precedence = Precedence::Undefined;
     }
     OpTok(std::unique_ptr<Token> left_child, left_child_t)
     {
         std::unique_ptr<OpTok> ptrTok;
         leftChild = std::move(left_child);
-        Precedence precednece = Precedence::Undefined;
+        Precedence precedence = Precedence::Undefined;
     }
     OpTok(std::unique_ptr<Token> right_child, right_child_t)
     {
         std::unique_ptr<OpTok> ptrTok;
         rightChild = std::move(right_child);
-        Precedence precednece = Precedence::Undefined;
+        Precedence precedence = Precedence::Undefined;
     }
     OpTok(Token val)
     {
         value = val.value;
         leftChild = std::make_unique<Token>();
-        rightChild = std::make_unique<Token>();
+        
         leftChild->column = NULL;
         leftChild->line = NULL;
         leftChild->type = TokenType::NONE;
         leftChild->value = " ";
+
+        rightChild = std::make_unique<Token>();
         rightChild->column = NULL;
         rightChild->line = NULL;
         rightChild->type = TokenType::NONE;
         rightChild->value = " ";
+
+        Precedence precedence = Precedence::Undefined;
     }
 
     OpTok()
-    {
+    {   
+        
         leftChild = std::make_unique<Token>();
-        rightChild = std::make_unique<Token>();
-
         leftChild->column = 0;
         leftChild->line = 0;
         leftChild->type = TokenType::NONE;
         leftChild->value = " ";
 
+        rightChild = std::make_unique<Token>();
         rightChild->column = 0;
         rightChild->line = 0;
         rightChild->type = TokenType::NONE;
         rightChild->value = " ";
+
+        Precedence precedence = Precedence::Undefined;
     }
 };
 
