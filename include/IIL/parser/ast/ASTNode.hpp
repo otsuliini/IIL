@@ -7,7 +7,7 @@
 struct ASTnode
 {
     Token NodeValue, parent;
-    std::shared_ptr<ASTnode> leftChild, rightChild, extension_of_parent; 
+    std::unique_ptr<ASTnode> leftChild, rightChild, extension_of_parent; 
     ASTnode()
     {
         parent.column = NULL;
@@ -20,9 +20,13 @@ struct ASTnode
                            leftChild(nullptr),
                            rightChild(nullptr),
                            extension_of_parent(nullptr) {}
+    ASTnode(std::unique_ptr<Token> token_right, std::unique_ptr<Token> token_left) : NodeValue(), 
+                                                                                     leftChild(token_left), 
+                                                                                     rightChild(token_right) {}
+                                                                                     
 };
 
-enum Precedence
+enum class Precedence
 {
     // Precedence in order of least to greatest
     LEVEL0,
@@ -32,4 +36,3 @@ enum Precedence
     LEVEL4,
     Undefined = -1, 
 };
-

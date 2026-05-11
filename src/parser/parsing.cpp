@@ -7,8 +7,8 @@
 
 std::vector<std::shared_ptr<ASTnode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
 {
-    Token highest_precedence_op = parserUtils::getHighestPrecedence(parserUtils::opBuffer);
-    std::shared_ptr<ASTnode> highest_precedence_node = parserUtils::to_node(highest_precedence_op);
+    OpTok highest_precedence_op = parserUtils::getHighestPrecedence(parserUtils::opBuffer);
+    std::shared_ptr<ASTnode> highest_precedence_node = parserUtils::to_node_op(highest_precedence_op);
 
     parserUtils::rem_buffered_op(highest_precedence_op);
 }
@@ -26,9 +26,10 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
         {
             std::unique_ptr<Token> unique_ptr_left = std::make_unique<Token>(Tokens[i - 1]); 
             std::unique_ptr<Token> unique_ptr_right = std::make_unique<Token>(Tokens[i + 1]); 
+
             curTok.rightChild = std::make_unique<OpTok>(unique_ptr_left, left_child_t{}); // Heap allocation
-            parserUtils::buffer_Op(curTok);
             curTok.rightChild = std::make_unique<OpTok>(unique_ptr_left, left_child_t{});
+            parserUtils::buffer_Op(curTok);
         }
     }
 }

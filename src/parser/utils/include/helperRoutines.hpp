@@ -49,7 +49,8 @@ namespace parserUtils
     void clearBuffer(); 
     Token getHighestPrecedence(std::vector<Token> token);
     void parserUtils::rem_buffered_op(Token op); 
-    std::shared_ptr<ASTnode> parserUtils::to_node(Token token); 
+    std::shared_ptr<ASTnode> parserUtils::to_node_op(Token token); 
+    std::unique_ptr<ASTnode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token); 
 }
 
 

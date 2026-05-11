@@ -12,25 +12,25 @@ Precedence parserUtils::getPrecedence(const OpTok token) {
     //! Add parentheses precedence
 
     if (value == "**"){
-        return LEVEL3; 
+        return Precedence::LEVEL3; 
     }
     else if (value == "*"){
-        return LEVEL2; 
+        return Precedence::LEVEL2; 
     }
     else if (value == "/"){
-        return LEVEL2; 
+        return Precedence::LEVEL2; 
     }
     else if (value == "%"){
-        return LEVEL2; 
+        return Precedence::LEVEL2; 
     }
     else if (value == "+"){
-        return LEVEL1; 
+        return Precedence::LEVEL1; 
     }
     else if (value == "-"){
-        return LEVEL1; 
+        return Precedence::LEVEL1; 
     }
     else if (value == "="){
-        return LEVEL0; 
+        return Precedence::LEVEL0; 
     }
     else {
         //! Add error handling.
@@ -87,8 +87,16 @@ void parserUtils::rem_buffered_op(Token op) {
     return; 
 }
 
-std::shared_ptr<ASTnode> parserUtils::to_node(Token token) {
-    std::unique_ptr<ASTnode> node; 
+std::unique_ptr<ASTnode> parserUtils::to_node_op(OpTok token) {
+    std::unique_ptr<ASTnode> node;
     node->NodeValue = token;
+    node->leftChild = token.leftChild; 
+    node->rightChild = token.rightChild;
+    return node; 
+}
+
+std::unique_ptr<ASTnode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token) {
+    std::unique_ptr<ASTnode> node; 
+    
     return node; 
 }
