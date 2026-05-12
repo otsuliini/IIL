@@ -16,7 +16,7 @@ struct ASTNode
         parent->type = TokenType::NONE;
     }
 
-    ASTNode(Token Value) : NodeValue(Value),
+    ASTNode(Token Value) : NodeValue(std::make_unique<Token>(Value)),
                            leftChild(nullptr),
                            rightChild(nullptr),
                            extension_of_parent(nullptr) {}
