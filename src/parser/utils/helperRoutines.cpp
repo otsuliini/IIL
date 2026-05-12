@@ -60,13 +60,11 @@ bool parserUtils::isRightAssociative(Token op)
 }
 
 void parserUtils::buffer_Op(Token op){
-    parserUtils::opBuffer.emplace_back(op); 
-    return; 
+    parserUtils::opBuffer.emplace_back(op);
 }
 
 void parserUtils::clearBuffer(){
-    opBuffer.clear(); 
-    return; 
+    opBuffer.clear();
 }
 
 Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer){
@@ -83,20 +81,17 @@ Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer){
 
 void parserUtils::rem_buffered_op(Token op) {
     std::vector<Token>::iterator iter = std::find(opBuffer.begin(), opBuffer.end(), op); 
-    opBuffer.erase(iter); 
-    return; 
+    opBuffer.erase(iter);
 }
 
 std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token) {
-    std::unique_ptr<ASTNode> node;
-    node->NodeValue = token;
-    node->leftChild = token.leftChild; 
-    node->rightChild = token.rightChild;
+    std::unique_ptr<ASTNode> node; 
+    node->NodeValue->column = token.column;
+    node->NodeValue->row = token.row;
+    node->NodeValue->Value = token.value;
+    node->NodeValue->type = token.type; 
+    node->leftChild = std::make_unique<ASTNode>(token.leftChild); 
+    node->rightChild = std::make_unique<ASTNode>(token.rightChild); 
     return node; 
 }
 
-std::unique_ptr<ASTNode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token) {
-    std::unique_ptr<ASTNode> node; 
-    
-    return node; 
-}

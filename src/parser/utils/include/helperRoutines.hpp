@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <variant>
 #include <vector> 
-
+#include <memory>
 namespace parserUtils
 {
     std::vector<Token> opBuffer;
@@ -48,9 +48,10 @@ namespace parserUtils
     void buffer_Op(Token token); 
     void clearBuffer(); 
     Token getHighestPrecedence(std::vector<Token> token);
-    void parserUtils::rem_buffered_op(Token op); 
-    std::shared_ptr<ASTNode> parserUtils::to_node_op(Token token); 
-    std::unique_ptr<ASTNode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token); 
+    void rem_buffered_op(Token op); 
+    std::shared_ptr<ASTNode> to_node_op(Token token); 
+    std::unique_ptr<ASTNode> to_node_ptr_token(std::unique_ptr<Token> token); 
+    std::unique_ptr<ASTNode> to_node_value_op()
 }
 
 

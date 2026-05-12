@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2.3)
+cmake_minimum_required(VERSION 4.3.2)
 
 project(IIL
     VERSION 1.0
@@ -25,8 +25,8 @@ add_executable(IIL
     src/lexer/utils/shift.cpp
     src/parser/errors/parserError.cpp
     src/parser/utils/helperRoutines.cpp
-    src/parser/AST.cpp
     src/parser/parsing.cpp
+    include/IIL/lexer/tokens.hpp
 )
 
 target_include_directories(IIL PRIVATE
@@ -37,11 +37,13 @@ target_include_directories(IIL PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL/parser
 )
 
-# Tests
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 enable_testing()
 
 add_executable(IIL_tests
     tests/lexer_test.cpp
+        src/parser/utils/helperRoutines.cpp
 )
 target_link_libraries(IIL_tests gtest_main)
 target_include_directories(IIL_tests PRIVATE

@@ -60,3 +60,7 @@ notes.txt
 todo.txt
 .vscode
 howToWriteGrammar.txt
+
+cmake-build-debug
+
+.idea
