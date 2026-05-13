@@ -6,20 +6,23 @@
 #include <vector>
 #include <memory>
 namespace parserUtils
-{
-    std::vector<Token> opBuffer;
+{   
+    class operatorBuffer {
+        std::vector<Token> opBuffer;
+    public:
+        
+        void rem_buffered_op(Token op); 
+        void clearBuffer(); 
+        void buffer_Op(Token token); 
 
-    std::string right_associative_ops[10] =
-        {
-            "=",
-            "+=",
-            "-=",
-            "*=",
-            "/=",
-            "%=",
-            "**",
-            "++",
-            "--"};
+        std::vector<Token> getBuffer() {
+            return opBuffer; 
+        }
+
+        operatorBuffer() {
+            clearBuffer(); 
+        }
+    }; 
 
     Precedence getPrecedence(ASTNode opNode);
     bool isBinary(std::string op);
@@ -45,13 +48,10 @@ namespace parserUtils
     }
 
     [[nodiscard]] bool isRightAssociative(Token op); 
-    void buffer_Op(Token token); 
-    void clearBuffer(); 
     [[nodiscard]] Token getHighestPrecedence(std::vector<Token> token);
-    void rem_buffered_op(Token op); 
     [[nodiscard]] std::shared_ptr<ASTNode> to_node_op(Token token); 
     [[nodiscard]] std::unique_ptr<ASTNode> to_node_ptr_token(std::unique_ptr<Token> token); 
     [[nodiscard]] std::unique_ptr<ASTNode> to_node_value_op();
-}
+} // namespace parserUtils
 
 

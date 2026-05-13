@@ -50,21 +50,12 @@ bool parserUtils::isBinary(Token op) {
     }
 }
 
-bool parserUtils::isRightAssociative(Token op)
-{
-    std::string *find_ops = std::find(std::begin(right_associative_ops), std::end(right_associative_ops), op);
-    if (find_ops != std::end(right_associative_ops))
-    {
-        return true;
-    }
-    return false;
+
+void parserUtils::operatorBuffer::buffer_Op(Token op){
+    parserUtils::operatorBuffer::opBuffer.emplace_back(op);
 }
 
-void parserUtils::buffer_Op(Token op){
-    parserUtils::opBuffer.emplace_back(op);
-}
-
-void parserUtils::clearBuffer(){
+void parserUtils::operatorBuffer::clearBuffer(){
     opBuffer.clear();
 }
 
@@ -80,7 +71,7 @@ Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer){
     return compTok; 
 }
 
-void parserUtils::rem_buffered_op(Token op) {
+void parserUtils::operatorBuffer::rem_buffered_op(Token op) {
     std::vector<Token>::iterator iter = std::find(opBuffer.begin(), opBuffer.end(), op); 
     opBuffer.erase(iter);
 }
