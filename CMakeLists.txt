@@ -22,6 +22,10 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+# -----------------------------------
+# MAIN: 
+# -----------------------------------
+
 file(GLOB_RECURSE IIL_SRC src/*)
 
 add_executable(IIL
@@ -32,6 +36,23 @@ target_include_directories(IIL PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
     ${CMAKE_SOURCE_DIR}/src
 )
+# -------------------------------------
+# REPL: 
+# -------------------------------------
+
+file(GLOB_RECURSE IIL_REPL stdlib/repl/*)
+
+add_executable(IIL_REPL
+    ${IIL_REPL}
+)
+
+target_include_directories(IIL_REPL PRIVATE
+    ${CMAKE_SOURCE_DIR}/stdlib/REPL/src
+)
+
+# ------------------------------------
+# TESTING: 
+# ------------------------------------
 
 enable_testing()
 

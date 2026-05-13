@@ -1,0 +1,3 @@
+[submodule "external/ascii-art"]
+	path = external/ascii-art
+	url = https://github.com/codewithnick/ascii-art.git
