@@ -88,8 +88,8 @@ void parserUtils::rem_buffered_op(Token op) {
 std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token) {
     std::unique_ptr<ASTNode> node; 
     node->NodeValue->column = token.column;
-    node->NodeValue->row = token.row;
-    node->NodeValue->Value = token.value;
+    node->NodeValue->line = token.line;
+    node->NodeValue->value = token.value;
     node->NodeValue->type = token.type; 
     node->leftChild = std::make_unique<ASTNode>(token.leftChild); 
     node->rightChild = std::make_unique<ASTNode>(token.rightChild); 
