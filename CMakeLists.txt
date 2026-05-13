@@ -26,9 +26,11 @@ FetchContent_MakeAvailable(googletest)
 # MAIN: 
 # -----------------------------------
 
-file(GLOB_RECURSE IIL_SRC src/*)
+file(GLOB_RECURSE IIL_SRC CONFIGURE_DEPENDS
+    src/*.cpp
+)
 
-add_executable(IIL
+add_executable(IIL 
     ${IIL_SRC}
 )
 
@@ -40,16 +42,33 @@ target_include_directories(IIL PRIVATE
 # REPL: 
 # -------------------------------------
 
-file(GLOB_RECURSE IIL_REPL stdlib/repl/*)
+file(GLOB_RECURSE IIL_REPL_SRC CONFIGURE_DEPENDS
+    stdlib/repl/*.cpp
+)
 
-add_executable(IIL_REPL
-    ${IIL_REPL}
+file(GLOB ASCII_SRC CONFIGURE_DEPENDS
+    external/ascii-art/*.cpp
+)
+
+add_library(ascii_art 
+    ${ASCII_SRC}
+)
+
+target_include_directories(ascii_art PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/ascii-art
+)
+
+add_executable(IIL_REPL 
+    ${IIL_REPL_SRC}
 )
 
 target_include_directories(IIL_REPL PRIVATE
-    ${CMAKE_SOURCE_DIR}/stdlib/REPL/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/stdlib/repl/src
 )
 
+target_link_libraries(IIL_REPL PRIVATE ascii_art)
+
+target_link_libraries(IIL_REPL PRIVATE ascii_art) 
 # ------------------------------------
 # TESTING: 
 # ------------------------------------
