@@ -43,10 +43,10 @@ target_include_directories(IIL PRIVATE
 # -------------------------------------
 
 file(GLOB_RECURSE IIL_REPL_SRC CONFIGURE_DEPENDS
-    stdlib/repl/*.cpp
+    stdlib/REPL/*.cpp
 )
 
-file(GLOB ASCII_SRC CONFIGURE_DEPENDS
+file(GLOB_RECURSE ASCII_SRC CONFIGURE_DEPENDS
     external/ascii-art/*.cpp
 )
 
@@ -63,12 +63,11 @@ add_executable(IIL_REPL
 )
 
 target_include_directories(IIL_REPL PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/stdlib/repl/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/stdlib/REPL/src
 )
 
 target_link_libraries(IIL_REPL PRIVATE ascii_art)
 
-target_link_libraries(IIL_REPL PRIVATE ascii_art) 
 # ------------------------------------
 # TESTING: 
 # ------------------------------------
