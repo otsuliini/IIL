@@ -23,8 +23,8 @@ struct Token
     TokenType type;
     std::string value;
 
-    int line;
-    int column;
+    unsigned int line;
+    unsigned int column;
     Token() : type(TokenType::UNKNOWN), value(""), line(0), column(0) {}
     Token(TokenType type, std::string value, int line, int column)
         : value(value), type(type), line(line), column(column)
