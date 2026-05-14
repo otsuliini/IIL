@@ -7,11 +7,13 @@
 
 std::vector<std::shared_ptr<ASTNode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
 {
-    parserUtils::operatorBuffer buff; 
-    OpTok highest_precedence_op = parserUtils::getHighestPrecedence(buff.getBuffer());
-    std::shared_ptr<ASTNode> highest_precedence_node = parserUtils::to_node_op(highest_precedence_op);
+    for (int i = 0; i <= size(opTokens); i++) {
+        parserUtils::operatorBuffer buff; 
+        OpTok highest_precedence_op = parserUtils::getHighestPrecedence(buff.getBuffer());
+        std::shared_ptr<ASTNode> highest_precedence_node = parserUtils::to_node_op(highest_precedence_op);
 
-    buff.rem_buffered_op(highest_precedence_op);
+        buff.rem_buffered_op(highest_precedence_op);
+    }
 }
 
 

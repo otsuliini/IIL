@@ -29,7 +29,7 @@ namespace parserUtils
         try {
             std::string value = T.value;  //! This won't work for astnode yet idt. So fix this too. 
         } catch ( ... ) { //! This is bad pracitce (It's only temporary)
-            std::cout << "template function getPrecedence() couldn't acc    ess T.value" << std::endl; 
+            std::cout << "template function getPrecedence() couldn't access T.value" << std::endl; 
         }
         std::string value = T.value; 
         //! Add parentheses precedence
