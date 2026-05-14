@@ -6,8 +6,9 @@ int main() {
     font.print("IIL");
     std::cout << "Interesting Interpreted Programming Language" << std::endl; 
 
-    // while (true) {
-    //     std::cout << "IIL>" << std::endl; 
-        
-    // }
+    while (true) {
+        std::string input; 
+        std::cout << "IIL>"; 
+        std::cin >> input; 
+    }
 }
