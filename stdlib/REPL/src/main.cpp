@@ -2,7 +2,7 @@
 #include "Ascii.h"
 
 int main() {
-    ascii::Ascii font(ascii::small);
+    ascii::Ascii font(ascii::starwar);
     font.print("IIL");
     std::cout << "Interesting Interpreted Programming Language" << std::endl; 
 
