@@ -10,8 +10,8 @@ public:
 
 private:
     std::string source;
-    int line = 1;
-    int column = 1;
+    std::optional<unsigned int> line = 1;
+    std::optional<unsigned int> column = 1;
 
     [[nodiscard]] std::vector<std::string> splitString();
 

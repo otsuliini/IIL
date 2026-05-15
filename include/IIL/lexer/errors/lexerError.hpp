@@ -3,7 +3,7 @@
 
 struct LexerError {
     std::string message; 
-    int line; 
-    int column;
+    unsigned int line; 
+    unsigned int column;
 };
 

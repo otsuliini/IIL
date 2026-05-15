@@ -9,9 +9,7 @@ struct ASTNode
     std::unique_ptr<Token> NodeValue, parent;
     std::unique_ptr<ASTNode> leftChild, rightChild, extension_of_parent; 
     ASTNode()
-    {
-        parent->column = NULL;
-        parent->line = NULL;
+    {  
         parent->value = " ";
         parent->type = TokenType::NONE;
     }

@@ -22,7 +22,7 @@ namespace parserUtils
         operatorBuffer() {
             clearBuffer(); 
         }
-    }; 
+    }; // Class: operatorBuffer
     template <typename T> 
     Precedence getPrecedence(T token) 
     {   
@@ -69,8 +69,8 @@ namespace parserUtils
         Equal
     };
 
-    template <typename T, typename U = T>
-    PrecedenceResult comparePrecedence(T token_1, U token_2)
+    template <typename T, typename U = T> 
+    PrecedenceResult comparePrecedence(const T token_1, const U token_2)
     {
         Precedence p1 = getPrecedence(token_1.value);
         Precedence p2 = getPrecedence(token_2.value);
