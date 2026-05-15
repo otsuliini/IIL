@@ -9,51 +9,59 @@
 #include <string>
 #include <memory>
 
+bool parserUtils::isBinary(Token op)
+{
 
-bool parserUtils::isBinary(Token op) {
-    
-    auto iterator = std::find(operators.begin(), operators.end(), op.value); 
-    if (iterator != operators.end()) {
-        return true; 
+    auto iterator = std::find(operators.begin(), operators.end(), op.value);
+    if (iterator != operators.end())
+    {
+        return true;
     }
-    else {
-        return false; 
+    else
+    {
+        return false;
     }
 }
 
-
-void parserUtils::operatorBuffer::buffer_Op(Token op){
+void parserUtils::operatorBuffer::buffer_Op(Token op)
+{
     parserUtils::operatorBuffer::opBuffer.emplace_back(op);
 }
 
-void parserUtils::operatorBuffer::clearBuffer(){
+void parserUtils::operatorBuffer::clearBuffer()
+{
     opBuffer.clear();
 }
 
-Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer){
-    Token compTok = tokenBuffer[0]; 
+Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer)
+{
+    Token compTok = tokenBuffer[0];
 
-    for (int i = 1; i <= tokenBuffer.size(); i++) {
-        Token curTok = tokenBuffer[i]; 
-        if (comparePrecedence<Token>(compTok, curTok) == PrecedenceResult::Token2) {
+    for (int i = 1; i <= tokenBuffer.size(); i++)
+    {
+        Token curTok = tokenBuffer[i];
+        if (comparePrecedence<Token>(compTok, curTok) == PrecedenceResult::Token2)
+        {
             compTok = curTok;
         }
     }
-    return compTok; 
+    return compTok;
 }
 
-void parserUtils::operatorBuffer::rem_buffered_op(Token op) {
-    std::vector<Token>::iterator iter = std::find(opBuffer.begin(), opBuffer.end(), op); 
+void parserUtils::operatorBuffer::rem_buffered_op(Token op)
+{
+    std::vector<Token>::iterator iter = std::find(opBuffer.begin(), opBuffer.end(), op);
     opBuffer.erase(iter);
 }
 
-std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token) {
-    std::unique_ptr<ASTNode> node; 
+std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token)
+{
+    std::unique_ptr<ASTNode> node;
     node->NodeValue->column = token.column;
     node->NodeValue->line = token.line;
     node->NodeValue->value = token.value;
-    node->NodeValue->type = token.type; 
-    node->leftChild = std::make_unique<ASTNode>(token.leftChild); 
-    node->rightChild = std::make_unique<ASTNode>(token.rightChild); 
-    return node; 
+    node->NodeValue->type = token.type;
+    node->leftChild = std::make_unique<ASTNode>(token.leftChild);
+    node->rightChild = std::make_unique<ASTNode>(token.rightChild);
+    return node;
 }
