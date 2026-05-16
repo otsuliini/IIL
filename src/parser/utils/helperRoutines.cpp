@@ -1,4 +1,4 @@
-#include "parser/ASTNode.hpp"
+#include "parser/Expr.hpp"
 #include "parser/utils/helperRoutines.hpp"
 #include "parser/errors/parserError.hpp"
 #include "parser/parsing.hpp"
@@ -8,49 +8,4 @@
 #include <algorithm>
 #include <string>
 #include <memory>
-
-bool parserUtils::isBinary(Token op)
-{
-
-    auto iterator = std::find(operators.begin(), operators.end(), op.value);
-    if (iterator != operators.end())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void parserUtils::operatorBuffer::buffer_Op(Token op)
-{
-    parserUtils::operatorBuffer::opBuffer.emplace_back(op);
-}
-
-void parserUtils::operatorBuffer::clearBuffer()
-{
-    opBuffer.clear();
-}
-
-Token parserUtils::getHighestPrecedence(std::vector<Token> tokenBuffer)
-{
-    Token compTok = tokenBuffer[0];
-
-    for (int i = 1; i <= tokenBuffer.size(); i++)
-    {
-        Token curTok = tokenBuffer[i];
-        if (comparePrecedence<Token>(compTok, curTok) == PrecedenceResult::Token2)
-        {
-            compTok = curTok;
-        }
-    }
-    return compTok;
-}
-
-void parserUtils::operatorBuffer::rem_buffered_op(Token op)
-{
-    std::vector<Token>::iterator iter = std::find(opBuffer.begin(), opBuffer.end(), op);
-    opBuffer.erase(iter);
-}
 
