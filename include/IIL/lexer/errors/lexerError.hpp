@@ -1,9 +1,8 @@
 #pragma once
-#include <iostream> 
+#include <iostream>
 
 struct LexerError {
-    std::string message; 
-    unsigned int line; 
-    unsigned int column;
+  std::string message;
+  unsigned int line;
+  unsigned int column;
 };
-

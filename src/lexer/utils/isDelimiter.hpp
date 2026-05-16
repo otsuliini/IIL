@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream> 
+#include <iostream>
 
 namespace utils {
-    bool isDelimiter(char ch); 
-        
+bool isDelimiter(char ch);
+
 }

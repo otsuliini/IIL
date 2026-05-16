@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
+#include <algorithm>
 #include <iostream>
-#include <algorithm>  
+#include <string>
 
 namespace utils {
-    bool isNumber(const std::string& s); 
+bool isNumber(const std::string &s);
 }

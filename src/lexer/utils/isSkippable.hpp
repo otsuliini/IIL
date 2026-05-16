@@ -1,7 +1,5 @@
 #pragma once
 
-namespace utils{
-    bool isSkippable(char token); 
+namespace utils {
+bool isSkippable(char token);
 }
-
-        

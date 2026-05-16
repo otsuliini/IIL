@@ -1,21 +1,15 @@
 #pragma once
 #include "lexer/tokens.hpp"
-#include <memory> 
-struct Expr 
-{
-    std::unique_ptr<Expr> leftChild; 
-    std::unique_ptr<Expr> rightChild; 
+#include <memory>
+struct Expr {
 
-    std::unique_ptr<Expr> parent; 
-    Token value; 
+  virtual ~Expr() = default;
+};
 
-    Expr() : leftChild(nullptr), rightChild(nullptr), parent(nullptr) 
-    {
-        value.value = " "; 
-        value.column;
-        value.line; 
-        value.type = TokenType::UNKNOWN; 
-    }
+struct BinaryExpr : public Expr {
+  std::unique_ptr<Expr> left;
+  std::unique_ptr<Expr> right;
 
-    
-}; 
+  Token op;
+  BinaryExpr() : left(nullptr), right(nullptr) {}
+};
