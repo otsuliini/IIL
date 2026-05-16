@@ -84,26 +84,26 @@ std::vector<Token> tokenizing::tokenize(std::string &sourceCode) {
 
     while (!src.empty()) {
         if (src.front() == "\n") {
-            line.value()++;
+            line++;
             column = 1;
             utils::shift(src);
         } else if (operators.count(src.front())) {
             tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         } else if (delimiters.count(src.front())) {
             tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         } else if (src.front() == "(") {
             tokens.emplace_back(TokenType::OpenParen, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         } else if (src.front() == ")") {
             tokens.emplace_back(TokenType::CloseParen, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         } else if (keywords.count(src.front())) {
             tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
         } else if (src.front() == "\t") {
             tokens.emplace_back(TokenType::Indent, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
         }
@@ -118,7 +118,7 @@ std::vector<Token> tokenizing::tokenize(std::string &sourceCode) {
             tokens.emplace_back(TokenType::Number, number, line, column);
         } else {
             tokens.emplace_back(TokenType::Identifier, utils::shift(src), line, column);
-            column.value()++;
+            column++;
         }
     }
     tokens.emplace_back(TokenType::FileEnd, "fileEnd", line, column);

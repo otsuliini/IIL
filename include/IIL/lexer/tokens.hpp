@@ -14,17 +14,17 @@ enum TokenType {
     FileEnd,
     BangEqual,
     EqualEqual,
+    NONE,
 };
 
 struct Token {
-    std::optional<TokenType> type;
-    std::optional<std::string> value;
+    TokenType type;
+    std::string value;
+    unsigned int line;
+    unsigned int column;
 
-    std::optional<unsigned int> line;
-    std::optional<unsigned int> column;
-    Token() : line(0), column(0) {}
-    Token(TokenType type, std::string value, int line, int column)
-        : value(value), type(type), line(line), column(column) {}
+    Token(TokenType type, std::string value, unsigned int line, unsigned int column)
+        : type(type), value(std::move(value)), line(line), column(column) {}
 };
 
 inline const std::unordered_set<std::string> operators = {"+", "-", "*", "/", "%", "<", ">", "="};

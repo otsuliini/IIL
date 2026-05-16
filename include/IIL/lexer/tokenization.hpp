@@ -9,8 +9,8 @@ class tokenizing {
 
   private:
     std::string source;
-    std::optional<unsigned int> line = 1;
-    std::optional<unsigned int> column = 1;
+    unsigned int line = 1;
+    unsigned int column = 1;
 
     [[nodiscard]] std::vector<std::string> splitString();
 

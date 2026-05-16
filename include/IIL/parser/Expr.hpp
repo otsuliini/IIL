@@ -11,5 +11,5 @@ struct BinaryExpr : public Expr {
     std::unique_ptr<Expr> right;
 
     Token op;
-    BinaryExpr() : left(nullptr), right(nullptr) {}
+    BinaryExpr() : left(nullptr), right(nullptr), op(TokenType::NONE, " ", 0, 0) {}
 };
