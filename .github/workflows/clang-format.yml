@@ -9,16 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (with submodules ignored)
         uses: actions/checkout@v4
+        with:
+          submodules: false
 
       - name: Install clang-format
         run: sudo apt-get update && sudo apt-get install -y clang-format
 
       - name: Check formatting
         run: |
-          files=$(find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h")
-
-          for file in $files; do
+          find . \
+            -path "./.git/*" -prune -o \
+            -path "./submodule/*" -prune -o \
+            \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" \) -print |
+          while read file; do
             clang-format --dry-run --Werror "$file"
           done
