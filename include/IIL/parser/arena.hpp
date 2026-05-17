@@ -9,6 +9,7 @@ struct ArenaChunk {
     std::size_t capacity;
     // how much is used:
     std::size_t offset;
+    // link to next chunk:
     ArenaChunk *nextChunk;
 };
 
@@ -16,11 +17,6 @@ class Arena {
     // First chunk:
     ArenaChunk *head_;
     ArenaChunk *current_Chunk_;
-    // Start of memory block
-    char *buffer_;
-    size_t capacity_;
-    // Amount of memory already used mapping to the current position in the arena.
-    size_t offset_;
 
   public:
     ArenaChunk *create_chunk(size_t size) {
@@ -38,7 +34,16 @@ class Arena {
         current_Chunk_ = head_;
     }
 
-    ~Arena() { ::operator delete(buffer_); }
+    ~Arena() {
+        ArenaChunk *c = head_;
+        // while (c != nullptr):
+        while (c) {
+            ::operator delete(c->buffer);
+            ArenaChunk *next = c->nextChunk;
+            delete c;
+            c = next;
+        }
+    }
 
     void *allocate(std::size_t size, std::size_t alignment);
 

@@ -24,4 +24,11 @@ void *Arena::allocate(std::size_t size, std::size_t alignment) {
     }
 }
 // reset the arena to reuse the memory block
-void Arena::reset() { offset_ = 0; }
+void Arena::reset() {
+    ArenaChunk *c = head_;
+    while (c) {
+        c->offset = 0;
+        c = c->nextChunk;
+    }
+    current_Chunk_ = head_;
+}
