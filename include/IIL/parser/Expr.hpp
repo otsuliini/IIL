@@ -7,9 +7,10 @@ struct Expr {
 };
 
 struct BinaryExpr : public Expr {
-    std::unique_ptr<Expr> left_;
-    std::unique_ptr<Expr> right_;
+    Expr *left_;
+    Expr *right_;
 
-    Token op;
-    BinaryExpr() : left_(nullptr), right_(nullptr), op(TokenType::NONE, " ", 0, 0) {}
+    Token op_;
+    BinaryExpr(Expr *left, Expr *right, Token op) : left_(left), right_(right), op_(op) {}
+    BinaryExpr() : left_(nullptr), right_(nullptr), op_(TokenType::NONE, " ", 0, 0) {}
 };

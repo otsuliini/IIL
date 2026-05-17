@@ -1,4 +1,6 @@
 #pragma once
+#include "lexer/tokens.hpp"
+#include "parser/expr.hpp"
 #include <cstddef>
 #include <memory>
 #include <new>
@@ -44,6 +46,8 @@ class Arena {
             c = next;
         }
     }
+
+    template <typename T> T *make(Expr *left, Token op, Expr *right) {}
 
     void *allocate(std::size_t size, std::size_t alignment);
 
