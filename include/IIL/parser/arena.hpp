@@ -47,10 +47,13 @@ class Arena {
         }
     }
 
-    template <typename T> T *make(Expr *left, Token op, Expr *right) {
+    template <typename T, typename... Args> T *make(Args &&...args) {
         // allocate raw memory in arena
         // construct object in that memory
         // return a pointer to that object.
+        void *address = allocate(sizeof(T), alignof(T));
+        // std::forward passes constructor arguments.
+        return new (address) T(std::forward<Args>(args)...)
     }
 
     void *allocate(std::size_t size, std::size_t alignment);
