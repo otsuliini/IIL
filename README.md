@@ -7,7 +7,7 @@ IIL. The newest, best, and most advanced interpreted coding language.
 Read these:
 
 - [Syntax](docs/SYNTAX.md)
-- [Grammar](docs/grammar.ebnf)
+
 
 ## Contributing
 
