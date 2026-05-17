@@ -32,7 +32,6 @@ file(GLOB_RECURSE IIL_SRC CONFIGURE_DEPENDS
 
 add_executable(IIL 
     ${IIL_SRC}
-    include/IIL/parser/arena.cpp
 )
 
 target_include_directories(IIL PRIVATE
