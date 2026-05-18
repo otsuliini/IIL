@@ -19,6 +19,10 @@ enum TokenType {
     GreaterEqual,
     Less,
     LessEqual,
+    Minus,
+    Plus,
+    Slash,
+    Star
 };
 
 struct Token {
