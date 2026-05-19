@@ -20,10 +20,12 @@ std::vector<std::string> tokenizing::splitString() {
         char ch = source[i];
         if (ch == '"') {
             std::string buf;
+            buf = buf + source[i];
             for (int k = i; i < source.size(); ++k) {
                 if (source[k] == '"') {
                     buf = buf + source[k];
                     chunks.push_back(buf);
+                    break;
                 }
                 buf = buf + source[k];
             }
