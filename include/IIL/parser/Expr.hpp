@@ -21,7 +21,14 @@ struct BinaryExpr : public Expr {
 };
 // TODO: finish these...
 // TODO: rename to UnaryExpr, and PrimaryExpr, and LiteralExpr etc.
-struct Unary : public Expr {};
-struct Primary : public Expr {};
+struct Unary : public Expr {
+    Token op;
+    Unary *right_;
+};
+struct Primary : public Expr {
+    // TODO: this def not correct fix this:
+    Token op;
+    Unary *right_;
+};
 struct Literal : public Expr {};
 struct Grouping : public Expr {}; // grouping may not need to inherit from Expr I'm not sure...

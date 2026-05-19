@@ -32,8 +32,17 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
-    template <typename T> T make_unary(T type) {
-        // TODO: implement this
+    template <typename T> T make_unary_ptr(Primary *type) {
+        T *expr;
+        expr->op = type->op;
+        expr->right_ = type->right_;
+        return expr;
+    }
+    template <typename T> T *make_binary_ptr(Unary *type) {
+        T *expr;
+        expr->op = type->op;
+        expr->right_ = type->right_;
+        return expr;
     }
 
     ParseError error(Token token, std::string message);

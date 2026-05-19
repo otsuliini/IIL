@@ -64,19 +64,19 @@ Primary *expressionParsing::primary() {
 Unary *expressionParsing::unary() {
     if (match(TokenType::Bang, TokenType::Minus)) {
         Token op = previous();
-        Unary right = unary();
-        return arena.make<Unary>(std::move(op), std::move(unary))
+        Unary *right = unary();
+        return arena.make<Unary>(std::move(op), std::move(unary));
     }
-    return primary();
+    return make_unary_ptr<Unary>(primary());
 }
 
 BinaryExpr *expressionParsing::factor() {
     // Todo: implement a "make_unary<>" function or template.
-    BinaryExpr *expr = unary();
+    BinaryExpr *expr = make_binary_ptr<BinaryExpr>(unary());
     while (match(TokenType::Slash, TokenType::Star)) {
         Token op = previous();
         Unary *right = unary();
-        return arena.make<BinaryExpr>(std::move(op), std::move(right))
+        return arena.make<BinaryExpr>(std::move(op), std::move(right));
     }
     return expr;
 }
