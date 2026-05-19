@@ -32,14 +32,23 @@ enum TokenType {
 };
 
 struct Token {
-    TokenType type;
-    std::string value;
-    unsigned int line;
-    unsigned int column;
+    TokenType type_;
+    std::string value_;
+    unsigned int line_;
+    unsigned int column_;
 
     Token(TokenType type, std::string value, unsigned int line, unsigned int column)
-        : type(type), value(std::move(value)), line(line), column(column) {}
+        : type_(type), value_(std::move(value)), line_(line), column_(column) {}
+    virtual ~Token() = default;
+
+    static Token make_token(TokenType type, std::string value, unsigned int line,
+                            unsigned int column) {
+        Token token(type, value, line, column);
+        return token;
+    }
 };
+
+Token nullToken { Token::make_token(TokenType::NONE, "", 0, 0); };
 
 inline const std::unordered_set<std::string> operators = {"+", "-", "*", "/", "%", "<", ">", "="};
 

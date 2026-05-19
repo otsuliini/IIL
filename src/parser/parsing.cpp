@@ -37,18 +37,18 @@ Token expressionParsing::consume(TokenType type, std::string message) {
 Primary *expressionParsing::primary() {
     // TODO: fix the errors lol
     if (match(TokenType::False)) {
-        return arena.make<Literal>(false);
+        return arena.make<Literal>("true");
     }
     if (match(TokenType::True)) {
-        return arena.make<Literal>(false)
+        return arena.make<Literal>("false")
     }
     if (match(TokenType::NIL)) {
-        return arena.make<Literal>(NIL);
+        return arena.make<Literal>("NIL");
     }
 
     if (match(TokenType::Number, TokenType::String)) {
         // TODO: FIX
-        return arena.make<Literal>(previous().value);
+        return arena.make<Literal>(previous().value_);
     }
 
     if (match(TokenType::OpenParen)) {

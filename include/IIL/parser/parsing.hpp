@@ -11,7 +11,7 @@ struct ParseError {
     Token token_;
     std::string message_;
 
-    ParseError() : token_(TokenType::NONE, " ", 0, 0), message_(" ") {}
+    ParseError() : token_(nullToken), message_(" ") {}
     ParseError(Token token, std::string message) : token_(token), message_(message) {}
 };
 

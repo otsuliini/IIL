@@ -30,5 +30,9 @@ struct Primary : public Expr {
     Token op;
     Unary *right_;
 };
-struct Literal : public Expr {};
+struct Literal : public Expr {
+    Token value_;
+    Literal() : value_(nullToken) {}
+    Literal(Token value) : value_(value) {}
+};
 struct Grouping : public Expr {}; // grouping may not need to inherit from Expr I'm not sure...
