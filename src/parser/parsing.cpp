@@ -15,11 +15,11 @@ Token expressionParsing::previous() const {
 Token expressionParsing::peek() const {
     return tokens[current];
 }
-auto expressionParsing::isAtEnd() const {
+bool expressionParsing::isAtEnd() const {
     return peek().type_ == TokenType::FileEnd;
 }
 
-Token expressionParsing::advance() override {
+Token expressionParsing::advance() {
     if (!isAtEnd())
         current++;
     return previous();
@@ -41,28 +41,28 @@ Token expressionParsing::consume(TokenType type, std::string message) {
 
 // The rule for primary is:
 // NUMBER | STRING | "true" | "false" | "null" | "(" expression ")" ;
-std::variant<PrimaryExpr*, Literal*, Grouping*> expressionParsing::primary() {
+Expr* expressionParsing::primary() {
     // TODO: fix the errors lol
     if (match(TokenType::False)) {
-        Literal* expr = arena.make<Literal>("false");
+        Expr* expr = arena.make<Expr>("false");
         return expr;
     }
     if (match(TokenType::True)) {
-        Literal* expr = arena.make<Literal>("true");
+        Expr* expr = arena.make<Expr>("true");
         return expr;
     }
     if (match(TokenType::NIL)) {
-        Literal* expr = arena.make<Literal>("NULL");
+        Expr* expr = arena.make<Expr>("NULL");
         return expr;
     }
 
     if (match(TokenType::Number, TokenType::String)) {
         // TODO: FIX
-        return arena.make<Literal>(previous().value_);
+        return arena.make<Expr>(previous().value_);
     }
 
     if (match(TokenType::OpenParen)) {
-        BinaryExpr* expr = expression();
+        Expr* expr = expression();
         // TODO: Implement better error handling:
         // TODO: Implement auto parenthesis insertion.
         consume(TokenType::CloseParen, "Expect ')' after expression.");
@@ -71,47 +71,47 @@ std::variant<PrimaryExpr*, Literal*, Grouping*> expressionParsing::primary() {
 }
 // The rule for unary is:
 // ( "!" | "-" ) unary | primary ;
-UnaryExpr* expressionParsing::unary() {
+Expr* expressionParsing::unary() {
     if (match(TokenType::Bang, TokenType::Minus)) {
         Token op = previous();
-        UnaryExpr* right = unary();
-        return arena.make<UnaryExpr>(std::move(op), std::move(unary));
+        Expr* right = unary();
+        return arena.make<Expr>(std::move(op), std::move(unary));
     }
-    return make_unary_ptr<UnaryExpr*>(primary());
+    return make_unary_ptr<Expr*>(primary());
 }
 
-BinaryExpr* expressionParsing::factor() {
+Expr* expressionParsing::factor() {
     // Todo: implement a "make_unary<>" function or template.
-    BinaryExpr* expr = make_binary_ptr<BinaryExpr>(unary());
+    Expr* expr = unary();
     while (match(TokenType::Slash, TokenType::Star)) {
         Token op = previous();
-        UnaryExpr* right = unary();
-        return arena.make<BinaryExpr>(std::move(op), std::move(right));
+        Expr* right = unary();
+        return arena.make<Expr>(std::move(op), std::move(right));
     }
     return expr;
 }
 
-BinaryExpr* expressionParsing::term() {
-    BinaryExpr* expr = factor();
+Expr* expressionParsing::term() {
+    Expr* expr = factor();
 
     while (match(TokenType::Minus, TokenType::Plus)) {
         Token op = previous();
-        BinaryExpr* right = factor();
-        expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right));
+        Expr* right = factor();
+        expr = arena.make<Expr>(std::move(expr), op, std::move(right));
     }
     return expr;
 }
 
 // The rule for comparison is:
 // term ( ( ">"| ">=" | "<" | "<=" ) term )* ;
-BinaryExpr* expressionParsing::comparison() {
-    BinaryExpr* expr = term();
+Expr* expressionParsing::comparison() {
+    Expr* expr = term();
 
     while (match(TokenType::Greater, TokenType::GreaterEqual, TokenType::Less,
                  TokenType::LessEqual)) {
         Token op = previous();
-        BinaryExpr* right = term();
-        expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right));
+        Expr* right = term();
+        expr = arena.make<Expr>(std::move(expr), op, std::move(right));
     }
     return expr;
 }
@@ -126,9 +126,9 @@ bool expressionParsing::check(TokenType type) {
 
 // The rule for equalitys is:
 // Equality := comparison ( ( "!=" | "==") comparison)* ;
-BinaryExpr* expressionParsing::equality() {
+Expr* expressionParsing::equality() {
     // Call the first comparison as shown in the production rules.
-    BinaryExpr* expr = arena.make<BinaryExpr>(comparison());
+    Expr* expr = arena.make<Expr>(comparison());
 
     // The (...)* loop in the rule is a while loop:
     // The rule states that we must find either a != or == token.
@@ -139,7 +139,7 @@ BinaryExpr* expressionParsing::equality() {
 
         auto right = comparison();
         // construct AST:
-        expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right));
+        expr = arena.make<Expr>(std::move(expr), op, std::move(right));
     }
 
     return expr;
@@ -147,6 +147,6 @@ BinaryExpr* expressionParsing::equality() {
 
 // Expression expands to the equality rule.
 // Expresson := equality;
-BinaryExpr* expressionParsing::expression() {
+Expr* expressionParsing::expression() {
     return equality();
 }

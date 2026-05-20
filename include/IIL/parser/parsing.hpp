@@ -41,39 +41,24 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
-    template <typename T>
-    T make_unary_ptr(std::variant<PrimaryExpr*, Literal*, Grouping*> type) {
-        T* expr;
-        expr->op = type->op;
-        expr->right_ = type->right_;
-        return expr;
-    }
-    template <typename T>
-    T* make_binary_ptr(UnaryExpr* type) {
-        T* expr;
-        expr->op = type->op;
-        expr->right_ = type->right_;
-        return expr;
-    }
-
     ParseError error(Token token, std::string message);
     Token consume(TokenType type, std::string message);
     Token previous() const;
     Token peek() const override;
     bool isAtEnd() const override;
     std::variant<PrimaryExpr*, Literal*, Grouping*> primary();
-    UnaryExpr* unary();
+    Expr* unary();
 
-    BinaryExpr* factor();
-    BinaryExpr* term();
-    BinaryExpr* comparison();
+    Expr* factor();
+    Expr* term();
+    Expr* comparison();
     std::vector<Token> tokens;
     Token advance() override;
     bool check(TokenType type);
 
-    BinaryExpr* equality();
-    BinaryExpr* expression();  // Unique_ptr is used because an astNode belongs
-                               // to exactly one parent.
+    Expr* equality();
+    Expr* expression();  // Unique_ptr is used because an astNode belongs
+                         // to exactly one parent.
 
     // move tokens so we don't have to make copy:
    public:
