@@ -3,3 +3,7 @@ title: IIL
 ---
 flowchart TD
     A[Lexer] -->|Tokens| B(Parser)
+    B -->|ByteCode| C(ByteCode Executor)
+    LibraryModules --> C
+    C --> D(Machine Code)
+    D --> E(Code executed)
