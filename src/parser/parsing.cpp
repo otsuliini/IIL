@@ -3,6 +3,7 @@
 #include "parser/arena.hpp"
 #include "parser/expr.hpp"
 #include <memory>
+#include <variant>
 #include <vector>
 
 // Each method for parsing a grammar rule produces an AST for that rule and returns it to the
@@ -10,7 +11,7 @@
 // that other rule's method.
 Token expressionParsing::previous() const { return tokens[current - 1]; }
 Token expressionParsing::peek() const { return tokens[current]; }
-auto expressionParsing::isAtEnd() const { return peek().type == TokenType::FileEnd; }
+auto expressionParsing::isAtEnd() const { return peek().type_ == TokenType::FileEnd; }
 
 Token expressionParsing::advance() {
     if (!isAtEnd())
@@ -34,16 +35,19 @@ Token expressionParsing::consume(TokenType type, std::string message) {
 
 // The rule for primary is:
 // NUMBER | STRING | "true" | "false" | "null" | "(" expression ")" ;
-Primary *expressionParsing::primary() {
+std::variant<PrimaryExpr *, Literal *, Grouping *> expressionParsing::primary() {
     // TODO: fix the errors lol
     if (match(TokenType::False)) {
-        return arena.make<Literal>("true");
+        Literal *expr = arena.make<Literal>("false");
+        return expr;
     }
     if (match(TokenType::True)) {
-        return arena.make<Literal>("false")
+        Literal *expr = arena.make<Literal>("true");
+        return expr;
     }
     if (match(TokenType::NIL)) {
-        return arena.make<Literal>("NIL");
+        Literal *expr = arena.make<Literal>("NULL");
+        return expr;
     }
 
     if (match(TokenType::Number, TokenType::String)) {
@@ -61,13 +65,13 @@ Primary *expressionParsing::primary() {
 }
 // The rule for unary is:
 // ( "!" | "-" ) unary | primary ;
-Unary *expressionParsing::unary() {
+UnaryExpr *expressionParsing::unary() {
     if (match(TokenType::Bang, TokenType::Minus)) {
         Token op = previous();
-        Unary *right = unary();
-        return arena.make<Unary>(std::move(op), std::move(unary));
+        UnaryExpr *right = unary();
+        return arena.make<UnaryExpr>(std::move(op), std::move(unary));
     }
-    return make_unary_ptr<Unary>(primary());
+    return make_unary_ptr<UnaryExpr>(primary());
 }
 
 BinaryExpr *expressionParsing::factor() {
@@ -75,7 +79,7 @@ BinaryExpr *expressionParsing::factor() {
     BinaryExpr *expr = make_binary_ptr<BinaryExpr>(unary());
     while (match(TokenType::Slash, TokenType::Star)) {
         Token op = previous();
-        Unary *right = unary();
+        UnaryExpr *right = unary();
         return arena.make<BinaryExpr>(std::move(op), std::move(right));
     }
     return expr;
@@ -87,7 +91,7 @@ BinaryExpr *expressionParsing::term() {
     while (match(TokenType::Minus, TokenType::Plus)) {
         Token op = previous();
         BinaryExpr *right = factor();
-        expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right))
+        expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right));
     }
     return expr;
 }
@@ -111,7 +115,7 @@ bool expressionParsing::check(TokenType type) {
     if (isAtEnd()) {
         return false;
     }
-    return (peek().type == type);
+    return (peek().type_ == type);
 }
 
 // The rule for equalitys is:

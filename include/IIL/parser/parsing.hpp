@@ -32,13 +32,13 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
-    template <typename T> T make_unary_ptr(Primary *type) {
+    template <typename T> T make_unary_ptr(PrimaryExpr *type) {
         T *expr;
         expr->op = type->op;
         expr->right_ = type->right_;
         return expr;
     }
-    template <typename T> T *make_binary_ptr(Unary *type) {
+    template <typename T> T *make_binary_ptr(UnaryExpr *type) {
         T *expr;
         expr->op = type->op;
         expr->right_ = type->right_;
@@ -50,8 +50,8 @@ class expressionParsing : public Parser {
     Token previous() const;
     Token peek() const;
     auto isAtEnd() const;
-    Primary *primary();
-    Unary *unary();
+    std::variant<PrimaryExpr *, Literal *, Grouping *> primary();
+    UnaryExpr *unary();
 
     BinaryExpr *factor();
     BinaryExpr *term();

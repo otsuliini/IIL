@@ -48,7 +48,7 @@ struct Token {
     }
 };
 
-Token nullToken { Token::make_token(TokenType::NONE, "", 0, 0); };
+Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
 
 inline const std::unordered_set<std::string> operators = {"+", "-", "*", "/", "%", "<", ">", "="};
 
