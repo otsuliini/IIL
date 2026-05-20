@@ -19,7 +19,7 @@ auto expressionParsing::isAtEnd() const {
     return peek().type_ == TokenType::FileEnd;
 }
 
-Token expressionParsing::advance() {
+Token expressionParsing::advance() override {
     if (!isAtEnd())
         current++;
     return previous();

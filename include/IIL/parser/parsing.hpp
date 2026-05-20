@@ -19,6 +19,13 @@ struct ParseError {
 class Parser {
    protected:
     Arena arena;
+
+   private:
+   public:
+    virtual Token advance();
+    virtual Token peek() const;
+    virtual bool isAtEnd() const;
+    void synchronize();
     virtual ~Parser() = default;
 };  // Class: Parser
 
@@ -52,8 +59,8 @@ class expressionParsing : public Parser {
     ParseError error(Token token, std::string message);
     Token consume(TokenType type, std::string message);
     Token previous() const;
-    Token peek() const;
-    auto isAtEnd() const;
+    Token peek() const override;
+    bool isAtEnd() const override;
     std::variant<PrimaryExpr*, Literal*, Grouping*> primary();
     UnaryExpr* unary();
 
@@ -61,7 +68,7 @@ class expressionParsing : public Parser {
     BinaryExpr* term();
     BinaryExpr* comparison();
     std::vector<Token> tokens;
-    Token advance();
+    Token advance() override;
     bool check(TokenType type);
 
     BinaryExpr* equality();
@@ -69,5 +76,6 @@ class expressionParsing : public Parser {
                                // to exactly one parent.
 
     // move tokens so we don't have to make copy:
+   public:
     expressionParsing(std::vector<Token> Tokens) : tokens(std::move(Tokens)) {}
 };  // Class: expressionParsing
